@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus · Tu agenda de contactos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <div class="logo-icon" aria-hidden="true">N</div>
+      <div>
+        <div class="logo-text">Nexus</div>
+        <div class="logo-sub">Agenda de contactos</div>
+      </div>
+    </div>
+
+    <div class="header-stats" aria-live="polite">
+      <div class="stat-chip">Total <span id="statTotal">0</span></div>
+      <div class="stat-chip">Visibles <span id="statVisible">0</span></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="contacts-panel">
+      <div class="panel-header">
+        <p class="panel-title">Todos los contactos</p>
+        <button class="btn-ghost" id="btnRefresh" type="button" aria-label="Actualizar contactos" title="Actualizar contactos">
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12a9 9 0 0 1-15.2 6.5" />
+            <path d="M3 12A9 9 0 0 1 18.2 5.5" />
+            <path d="M18 2v4h4" />
+            <path d="M6 22v-4H2" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="search-wrap">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" placeholder="Buscar por nombre, apellido o telefono" autocomplete="off" />
+      </div>
+
+      <div id="contactList" aria-live="polite">
+        <div class="skeleton-card"><div class="skel skel-circle"></div><div class="skel-lines"><div class="skel skel-line1"></div><div class="skel skel-line2"></div></div></div>
+        <div class="skeleton-card"><div class="skel skel-circle"></div><div class="skel-lines"><div class="skel skel-line1"></div><div class="skel skel-line2"></div></div></div>
+        <div class="skeleton-card"><div class="skel skel-circle"></div><div class="skel-lines"><div class="skel skel-line1"></div><div class="skel skel-line2"></div></div></div>
+        <div class="skeleton-card"><div class="skel skel-circle"></div><div class="skel-lines"><div class="skel skel-line1"></div><div class="skel skel-line2"></div></div></div>
+      </div>
+    </section>
+
+    <aside class="form-panel">
+      <div class="form-eyebrow" id="formMode">Nuevo contacto</div>
+      <h2 class="form-title">Agregar a tu red</h2>
+      <p class="form-desc">Completa los datos y el contacto quedara guardado en Nexus.</p>
+
+      <form id="contactForm" novalidate>
+        <div class="form-group">
+          <label for="fNombre">Nombre</label>
+          <input type="text" id="fNombre" placeholder="ej. Bryam" autocomplete="given-name" />
+          <p class="err-msg" id="eNombre">El nombre es requerido.</p>
+        </div>
+
+        <div class="form-group">
+          <label for="fApellido">Apellido</label>
+          <input type="text" id="fApellido" placeholder="ej. Garcia" autocomplete="family-name" />
+          <p class="err-msg" id="eApellido">El apellido es requerido.</p>
+        </div>
+
+        <div class="form-group">
+          <label for="fTelefono">Telefono</label>
+          <input type="tel" id="fTelefono" placeholder="ej. 809-555-0123" autocomplete="tel" />
+          <p class="err-msg" id="eTelefono">El telefono es requerido.</p>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn-submit" id="btnSave" type="submit">
+            <span class="btn-inner" id="btnInner">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 5v14M5 12h14"></path>
+              </svg>
+              Guardar contacto
+            </span>
+          </button>
+
+          <button class="btn-secondary hidden" id="btnCancelEdit" type="button">Cancelar</button>
+        </div>
+      </form>
+
+      <hr class="form-divider" />
+
+      <p class="preview-section-label">Vista previa</p>
+      <div class="preview-card">
+        <div class="preview-avatar" id="prevAvatar">?</div>
+        <div class="preview-copy">
+          <div class="preview-name" id="prevName">Nombre Apellido</div>
+          <div class="preview-phone" id="prevPhone">Telefono</div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
